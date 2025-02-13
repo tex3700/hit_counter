@@ -7,8 +7,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const city = data.city;
             const device = navigator.userAgent;
 
+            const express = require('express');
+            const app = express();
+            app.get('/api/track', async (req, res) => {
+                const response = await fetch('https://btx.tw1.ru/tracker/track.php', {
+                    method: req.method,
+                    headers: req.headers,
+                    body: req.body
+                });
+
+                const data = await response.text();
+                res.set("Access-Control-Allow-Origin", "*");
+                res.send(data);
+            });
+
             // Отправка данных на сервер
-            fetch('track.php', {
+            fetch('/api/track', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -16,9 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({
                     ip: ip,
                     city: city,
-                    device: device
+                    userAgent: device,
+                    action: "track"
                 })
-            });
+            }).then(r => console.log(r));
         })
         .catch(error => console.error('Error:', error));
 });

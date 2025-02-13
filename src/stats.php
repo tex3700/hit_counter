@@ -1,6 +1,9 @@
 <?php
-require '../db/db_conn.php';
-if (!isset($_SESSION['auth'])) die(header('Location: login.php'));
+require $_SERVER['DOCUMENT_ROOT'] . '/db/db_conn.php';
+if (!isset($_SESSION['auth'])) {
+    $location = "http://" . $_SERVER['HTTP_HOST'] . "/src/auth/login.php";
+    die(header("Location: $location"));
+}
 
 // Данные для графиков
 $hourly = $pdo->query("
@@ -16,11 +19,14 @@ $cities = $pdo->query("
     FROM visits 
     GROUP BY city
 ")->fetchAll(PDO::FETCH_ASSOC);
+
+$logout = "http://" . $_SERVER['HTTP_HOST'] . "/src/auth/logout.php";
 ?>
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Статистика</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -32,9 +38,11 @@ $cities = $pdo->query("
 <div style="width: 600px;">
     <canvas id="cityChart"></canvas>
 </div>
-<a href="logout.php">Выйти</a>
+<a href="<?= $logout ?>">Выйти</a>
 
 <script>
+    import {Chart} from "chart.js";
+
     // График по часам
     new Chart(document.getElementById('hourlyChart'), {
         type: 'line',

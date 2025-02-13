@@ -8,3 +8,4 @@ function executeQuery($pdo, $query): void
         echo "Error executing query: " . $e->getMessage() . "\n";
     }
 }
+

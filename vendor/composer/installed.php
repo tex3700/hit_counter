@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'vendor_name/hit_counter',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '2478df858c32c268773d5748d86bc877371d4ed5',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -38,9 +38,9 @@
             'dev_requirement' => false,
         ),
         'vendor_name/hit_counter' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '2478df858c32c268773d5748d86bc877371d4ed5',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
