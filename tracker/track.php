@@ -13,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $city = $_POST['city'] ?? 'Unknown';
 
         // Определение типа устройства
-//        $detect = new Mobile_Detect();
-//        $detect->setUserAgent($_POST['userAgent'] ?? '');
+        $detect = new Mobile_Detect();
+        $detect->setUserAgent($_POST['userAgent'] ?? '');
         $device = 'desktop';
-//        if ($detect->isMobile()) $device = 'mobile';
-//        if ($detect->isTablet()) $device = 'tablet';
+        if ($detect->isMobile()) $device = 'mobile';
+        if ($detect->isTablet()) $device = 'tablet';
 
         // Сохранение в SQLite
         $stmt = $pdo->prepare("INSERT INTO visits (ip, city, device) VALUES (?, ?, ?)");
